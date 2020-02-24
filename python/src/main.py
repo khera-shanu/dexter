@@ -1,5 +1,5 @@
 import sys, os
-from scanner.scanner import Scanner
+from interpreter.scanner.scanner import Scanner
 
 class Dexter:
 
