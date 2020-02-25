@@ -8,19 +8,19 @@ class Expr(ABC):
 
 class ExprVisitor(ABC):
     @abstractmethod
-    def visitBinary(binary_expr) -> None:
+    def visitBinary(self, binary_expr) -> None:
         pass
 
     @abstractmethod
-    def visitGrouping(grouping_expr) -> None:
+    def visitGrouping(self, grouping_expr) -> None:
         pass
 
     @abstractmethod
-    def visitLiteral(unary_expr) -> None:
+    def visitLiteral(self, unary_expr) -> None:
         pass
 
     @abstractmethod
-    def visitUnary(literal_value) -> None:
+    def visitUnary(self, literal_value) -> None:
         pass
 
 class Binary(Expr):
@@ -30,25 +30,26 @@ class Binary(Expr):
         self.right = right
 
     def accept(self, visitor:ExprVisitor) -> None:
-        visitor.visitBinary(self)
+        return visitor.visitBinary(self)
 
 class Grouping(Expr):
     def __init__(self, expression:Expr) -> None:
         self.expression = expression
 
     def accept(self, visitor:ExprVisitor) -> None:
-        visitor.visitGrouping(self)
+        return visitor.visitGrouping(self)
 
 class Literal(Expr):
     def __init__(self, value:object) -> None:
         self.value = value
 
     def accept(self, visitor:ExprVisitor) -> None:
-        visitor.visitLiteral(self)
+        return visitor.visitLiteral(self)
 
 class Unary(Expr):
     def __init__(self, operator:Token, right:Expr) -> None:
-        self.right = Expr
+        self.operator = operator
+        self.right = right
 
     def accept(self, visitor:ExprVisitor) -> None:
-        visitor.visitUnary(self)
+        return visitor.visitUnary(self)
